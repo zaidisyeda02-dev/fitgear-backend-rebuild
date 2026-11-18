@@ -178,6 +178,13 @@ Never commit `.env`.
    Entry file: `server.js`. Start command: `node server.js`.
 4. In hPanel create a MySQL database and user, then create the tables
    with `db/schema.sql` (the app also creates them on first start).
+   Then import `db/seed.sql` into the same database with phpMyAdmin
+   to insert the 12 products. This step matters: on the live Hostinger
+   deploy on 19 November 2026 the app did not create the tables or
+   seed the products on startup, even though the same code seeds
+   correctly locally, so the tables and the seed were imported
+   manually. The cause of the missing startup seed on Hostinger is
+   not yet established.
 5. Set the environment variables in the Web App settings: DB_HOST
    127.0.0.1, DB_PORT 3306, DB_USER, DB_PASSWORD, DB_NAME, and PORT
    if Hostinger asks for it. Never put credentials in the code.
@@ -239,5 +246,16 @@ Never commit `.env`.
   canonical build. Orders are saved to the database at checkout.
 - The free shipping threshold of PKR 50,000 is a rebuild choice,
   not a verified canonical fact. See the shipping note above.
-- No live backend exists yet. This project has only been run and
-  verified locally.
+- Live backend deployed 19 November 2026 at
+  https://marine-indigo-opossum-85.hostingersite.com/, Node 22 Web App
+  on a new temp domain, MySQL database u388953562_fitgear, code from
+  https://github.com/zaidisyeda02-dev/fitgear-backend-rebuild. Tables
+  and products were imported with db/schema.sql and db/seed.sql via
+  phpMyAdmin, because the app did not seed on startup on Hostinger.
+  Live end to end verification passed on desktop: 12 products with
+  exact PKR prices, shop filters 4 of 12 per category, Forge detail,
+  test order FG-1001, newsletter and contact, Admin Panel first-use
+  setup form shown but not submitted, test rows deleted after, 12
+  products left, 0 orders, 0 subscribers, 0 messages, 0 admins.
+  The 390px live check is still open, the local 390px check passed
+  with zero overflow on the same code.
